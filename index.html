@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Smart Calculator</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body{
+  margin:0;
+  background:#111;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  min-height:100vh;
+  font-family:Arial;
+}
+.calculator{
+  background:#1c1c1c;
+  padding:15px;
+  border-radius:12px;
+  width:340px;
+}
+input{
+  width:100%;
+  height:60px;
+  font-size:26px;
+  text-align:right;
+  border:none;
+  border-radius:8px;
+  margin-bottom:10px;
+  padding:10px;
+}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+}
+button{
+  height:55px;
+  font-size:18px;
+  border:none;
+  border-radius:8px;
+  cursor:pointer;
+}
+.num{background:#333;color:#fff;}
+.op{background:#ff9500;color:#fff;}
+.clear{background:#ff3b30;color:#fff;}
+.equal{background:#34c759;color:#fff;grid-column:span 2;}
+</style>
+</head>
+
+<body>
+
+<div class="calculator">
+<input id="scr" disabled>
+
+<div class="grid">
+<button class="clear" onclick="clr()">C</button>
+<button class="op" onclick="add('%')">%</button>
+<button class="op" onclick="add('/')">÷</button>
+<button class="op" onclick="add('*')">×</button>
+
+<button class="num" onclick="add('7')">7</button>
+<button class="num" onclick="add('8')">8</button>
+<button class="num" onclick="add('9')">9</button>
+<button class="op" onclick="add('-')">−</button>
+
+<button class="num" onclick="add('4')">4</button>
+<button class="num" onclick="add('5')">5</button>
+<button class="num" onclick="add('6')">6</button>
+<button class="op" onclick="add('+')">+</button>
+
+<button class="num" onclick="add('1')">1</button>
+<button class="num" onclick="add('2')">2</button>
+<button class="num" onclick="add('3')">3</button>
+<button class="equal" onclick="cal()">=</button>
+
+<button class="num" onclick="add('0')">0</button>
+<button class="num" onclick="add('.')">.</button>
+</div>
+</div>
+
+<script>
+let s=document.getElementById("scr");
+function add(v){s.value+=v;}
+function clr(){s.value="";}
+function cal(){
+ try{s.value=eval(s.value);}
+ catch{s.value="Error";}
+}
+document.addEventListener("keydown",e=>{
+ if("0123456789.+-*/".includes(e.key))add(e.key);
+ if(e.key==="Enter")cal();
+ if(e.key==="Backspace")s.value=s.value.slice(0,-1);
+});
+</script>
+
+</body>
+  </html>
