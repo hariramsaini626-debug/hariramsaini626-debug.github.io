@@ -1,158 +1,149 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
-<title>Smart Scientific Calculator</title>
+<title>Smart Calculator Website</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
 :root{
-  --bg:#111;
-  --box:#1c1c1c;
-  --btn:#333;
-  --text:#fff;
+ --bg:#111;--box:#1c1c1c;--btn:#333;--text:#fff;
 }
 .light{
-  --bg:#f2f2f2;
-  --box:#ffffff;
-  --btn:#ddd;
-  --text:#000;
+ --bg:#f2f2f2;--box:#fff;--btn:#ddd;--text:#000;
 }
 body{
-  margin:0;
-  background:var(--bg);
-  color:var(--text);
-  font-family:Arial;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  min-height:100vh;
+ margin:0;background:var(--bg);color:var(--text);
+ font-family:Arial;display:flex;justify-content:center;
 }
-.calculator{
-  background:var(--box);
-  width:360px;
-  padding:15px;
-  border-radius:12px;
+.container{
+ width:380px;background:var(--box);
+ margin:10px;padding:15px;border-radius:12px;
 }
-.top{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
+.menu{
+ display:flex;flex-wrap:wrap;gap:5px;margin-bottom:10px;
 }
-.toggle{
-  cursor:pointer;
-  font-size:14px;
+.menu button{
+ flex:1;font-size:13px;padding:6px;border:none;
+ border-radius:6px;cursor:pointer;
+ background:#ff9500;color:#fff;
 }
 input{
-  width:100%;
-  height:60px;
-  font-size:26px;
-  text-align:right;
-  border:none;
-  border-radius:8px;
-  padding:10px;
-  margin:10px 0;
+ width:100%;height:50px;font-size:22px;
+ text-align:right;border:none;border-radius:8px;
+ padding:10px;margin-bottom:10px;
 }
 .grid{
-  display:grid;
-  grid-template-columns:repeat(5,1fr);
-  gap:8px;
+ display:grid;grid-template-columns:repeat(4,1fr);
+ gap:8px;
 }
-button{
-  height:48px;
-  border:none;
-  border-radius:8px;
-  font-size:16px;
-  cursor:pointer;
-  background:var(--btn);
-  color:var(--text);
+button.calc{
+ height:45px;border:none;border-radius:8px;
+ background:var(--btn);color:var(--text);
+ font-size:16px;cursor:pointer;
 }
 .op{background:#ff9500;color:#fff;}
-.equal{background:#34c759;color:#fff;grid-column:span 2;}
+.eq{background:#34c759;color:#fff;grid-column:span 2;}
 .clear{background:#ff3b30;color:#fff;}
-.history{
-  font-size:13px;
-  margin-top:8px;
-  max-height:70px;
-  overflow:auto;
-}
+.section{display:none;}
+.show{display:block;}
+.toggle{text-align:right;font-size:14px;cursor:pointer;}
 </style>
 </head>
 
 <body>
-<div class="calculator">
-  <div class="top">
-    <b>Smart Calculator</b>
-    <span class="toggle" onclick="mode()">🌙 / ☀️</span>
-  </div>
+<div class="container">
 
-  <input id="scr" disabled>
+<div class="toggle" onclick="mode()">🌙 / ☀️</div>
 
-  <div class="grid">
-    <button onclick="fn('sqrt')">√</button>
-    <button onclick="fn('sq')">x²</button>
-    <button onclick="fn('sin')">sin</button>
-    <button onclick="fn('cos')">cos</button>
-    <button onclick="fn('tan')">tan</button>
+<div class="menu">
+<button onclick="openTab('normal')">Normal</button>
+<button onclick="openTab('gst')">GST</button>
+<button onclick="openTab('discount')">Discount</button>
+<button onclick="openTab('emi')">EMI</button>
+</div>
 
-    <button class="clear" onclick="clr()">C</button>
-    <button onclick="add('%')">%</button>
-    <button onclick="add('/')">÷</button>
-    <button onclick="add('*')">×</button>
-    <button onclick="add('-')">−</button>
+<!-- NORMAL CALCULATOR -->
+<div id="normal" class="section show">
+<input id="scr" disabled>
+<div class="grid">
+<button class="calc clear" onclick="clr()">C</button>
+<button class="calc" onclick="add('%')">%</button>
+<button class="calc op" onclick="add('/')">÷</button>
+<button class="calc op" onclick="add('*')">×</button>
 
-    <button onclick="add('7')">7</button>
-    <button onclick="add('8')">8</button>
-    <button onclick="add('9')">9</button>
-    <button onclick="add('+')">+</button>
-    <button onclick="add('.')">.</button>
+<button class="calc" onclick="add('7')">7</button>
+<button class="calc" onclick="add('8')">8</button>
+<button class="calc" onclick="add('9')">9</button>
+<button class="calc op" onclick="add('-')">−</button>
 
-    <button onclick="add('4')">4</button>
-    <button onclick="add('5')">5</button>
-    <button onclick="add('6')">6</button>
-    <button onclick="add('1')">1</button>
-    <button onclick="add('2')">2</button>
+<button class="calc" onclick="add('4')">4</button>
+<button class="calc" onclick="add('5')">5</button>
+<button class="calc" onclick="add('6')">6</button>
+<button class="calc op" onclick="add('+')">+</button>
 
-    <button onclick="add('3')">3</button>
-    <button onclick="add('0')">0</button>
-    <button class="equal" onclick="cal()">=</button>
-  </div>
+<button class="calc" onclick="add('1')">1</button>
+<button class="calc" onclick="add('2')">2</button>
+<button class="calc" onclick="add('3')">3</button>
+<button class="calc eq" onclick="cal()">=</button>
 
-  <div class="history" id="his"></div>
+<button class="calc" onclick="add('0')">0</button>
+<button class="calc" onclick="add('.')">.</button>
+</div>
+</div>
+
+<!-- GST -->
+<div id="gst" class="section">
+<input id="gst_amt" placeholder="Amount">
+<input id="gst_per" placeholder="GST %">
+<button class="calc eq" onclick="gst()">Calculate</button>
+<p id="gst_res"></p>
+</div>
+
+<!-- DISCOUNT -->
+<div id="discount" class="section">
+<input id="mrp" placeholder="MRP">
+<input id="dis" placeholder="Discount %">
+<button class="calc eq" onclick="discount()">Calculate</button>
+<p id="dis_res"></p>
+</div>
+
+<!-- EMI -->
+<div id="emi" class="section">
+<input id="loan" placeholder="Loan Amount">
+<input id="rate" placeholder="Interest %">
+<input id="time" placeholder="Years">
+<button class="calc eq" onclick="emi()">Calculate</button>
+<p id="emi_res"></p>
+</div>
+
 </div>
 
 <script>
 let s=document.getElementById("scr");
-let h=document.getElementById("his");
-let hist=[];
-
 function add(v){s.value+=v;}
 function clr(){s.value="";}
-function cal(){
- try{
-  let r=eval(s.value);
-  hist.unshift(s.value+" = "+r);
-  hist=hist.slice(0,10);
-  h.innerHTML=hist.join("<br>");
-  s.value=r;
- }catch{ s.value="Error"; }
+function cal(){try{s.value=eval(s.value);}catch{s.value="Error";}}
+
+function openTab(id){
+ document.querySelectorAll('.section').forEach(x=>x.classList.remove('show'));
+ document.getElementById(id).classList.add('show');
 }
-function fn(t){
- let v=parseFloat(s.value);
- if(isNaN(v))return;
- if(t=="sqrt")s.value=Math.sqrt(v);
- if(t=="sq")s.value=v*v;
- if(t=="sin")s.value=Math.sin(v);
- if(t=="cos")s.value=Math.cos(v);
- if(t=="tan")s.value=Math.tan(v);
+
+function gst(){
+ let a=+gst_amt.value,p=+gst_per.value;
+ gst_res.innerHTML="Final: ₹"+(a+(a*p/100));
 }
-function mode(){
- document.body.classList.toggle("light");
+function discount(){
+ let m=+mrp.value,p=+dis.value;
+ dis_res.innerHTML="Price: ₹"+(m-(m*p/100));
 }
-document.addEventListener("keydown",e=>{
- if("0123456789.+-*/".includes(e.key))add(e.key);
- if(e.key==="Enter")cal();
- if(e.key==="Backspace")s.value=s.value.slice(0,-1);
-});
+function emi(){
+ let P=+loan.value,r=+rate.value/1200,n=+time.value*12;
+ let e=(P*r*Math.pow(1+r,n))/(Math.pow(1+r,n)-1);
+ emi_res.innerHTML="EMI: ₹"+e.toFixed(2);
+}
+function mode(){document.body.classList.toggle("light");}
 </script>
+
 </body>
   </html>
