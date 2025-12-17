@@ -2,8 +2,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Smart Calculator Website</title>
+<title>Smart Calculator Online – GST, EMI, Discount</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <style>
 :root{
  --bg:#111;--box:#1c1c1c;--btn:#333;--text:#fff;
@@ -12,41 +13,93 @@
  --bg:#f2f2f2;--box:#fff;--btn:#ddd;--text:#000;
 }
 body{
- margin:0;background:var(--bg);color:var(--text);
- font-family:Arial;display:flex;justify-content:center;
+ margin:0;
+ background:var(--bg);
+ color:var(--text);
+ font-family:Arial;
+ display:flex;
+ justify-content:center;
 }
 .container{
- width:380px;background:var(--box);
- margin:10px;padding:15px;border-radius:12px;
+ width:390px;
+ background:var(--box);
+ margin:10px;
+ padding:15px;
+ border-radius:12px;
+}
+h1{
+ font-size:18px;
+ text-align:center;
+ margin:5px 0 10px;
 }
 .menu{
- display:flex;flex-wrap:wrap;gap:5px;margin-bottom:10px;
+ display:flex;
+ flex-wrap:wrap;
+ gap:5px;
+ margin-bottom:10px;
 }
 .menu button{
- flex:1;font-size:13px;padding:6px;border:none;
- border-radius:6px;cursor:pointer;
- background:#ff9500;color:#fff;
+ flex:1;
+ font-size:13px;
+ padding:6px;
+ border:none;
+ border-radius:6px;
+ cursor:pointer;
+ background:#ff9500;
+ color:#fff;
 }
 input{
- width:100%;height:50px;font-size:22px;
- text-align:right;border:none;border-radius:8px;
- padding:10px;margin-bottom:10px;
+ width:100%;
+ height:48px;
+ font-size:20px;
+ text-align:right;
+ border:none;
+ border-radius:8px;
+ padding:8px;
+ margin-bottom:8px;
 }
 .grid{
- display:grid;grid-template-columns:repeat(4,1fr);
+ display:grid;
+ grid-template-columns:repeat(4,1fr);
  gap:8px;
 }
 button.calc{
- height:45px;border:none;border-radius:8px;
- background:var(--btn);color:var(--text);
- font-size:16px;cursor:pointer;
+ height:45px;
+ border:none;
+ border-radius:8px;
+ background:var(--btn);
+ color:var(--text);
+ font-size:16px;
+ cursor:pointer;
 }
 .op{background:#ff9500;color:#fff;}
 .eq{background:#34c759;color:#fff;grid-column:span 2;}
 .clear{background:#ff3b30;color:#fff;}
 .section{display:none;}
 .show{display:block;}
-.toggle{text-align:right;font-size:14px;cursor:pointer;}
+.toggle{
+ text-align:right;
+ font-size:14px;
+ cursor:pointer;
+ margin-bottom:5px;
+}
+
+/* ADS PLACEHOLDER */
+.ad{
+ width:100%;
+ background:#f1f1f1;
+ color:#000;
+ text-align:center;
+ padding:10px;
+ margin:10px 0;
+ border-radius:6px;
+ font-size:14px;
+}
+.content{
+ font-size:14px;
+ line-height:1.5;
+ margin:10px 0;
+}
 </style>
 </head>
 
@@ -54,6 +107,12 @@ button.calc{
 <div class="container">
 
 <div class="toggle" onclick="mode()">🌙 / ☀️</div>
+<h1>Smart Calculator Online</h1>
+
+<!-- TOP AD -->
+<div class="ad">
+ 🔸 Ad Space (Top Banner – 728x90 / 320x100)
+</div>
 
 <div class="menu">
 <button onclick="openTab('normal')">Normal</button>
@@ -116,6 +175,25 @@ button.calc{
 <p id="emi_res"></p>
 </div>
 
+<!-- CONTENT (ADSENSE IMPORTANT) -->
+<div class="content">
+<p>
+This smart calculator website helps users calculate GST,
+discounts, EMI and daily calculations easily.
+It works fast on mobile and desktop devices and is completely free to use.
+</p>
+</div>
+
+<!-- MIDDLE AD -->
+<div class="ad">
+ 🔸 Ad Space (In-Content Ad)
+</div>
+
+<!-- BOTTOM AD -->
+<div class="ad">
+ 🔸 Ad Space (Footer Ad)
+</div>
+
 </div>
 
 <script>
@@ -131,19 +209,21 @@ function openTab(id){
 
 function gst(){
  let a=+gst_amt.value,p=+gst_per.value;
- gst_res.innerHTML="Final: ₹"+(a+(a*p/100));
+ gst_res.innerHTML="Final Amount: ₹"+(a+(a*p/100));
 }
 function discount(){
  let m=+mrp.value,p=+dis.value;
- dis_res.innerHTML="Price: ₹"+(m-(m*p/100));
+ dis_res.innerHTML="Final Price: ₹"+(m-(m*p/100));
 }
 function emi(){
  let P=+loan.value,r=+rate.value/1200,n=+time.value*12;
  let e=(P*r*Math.pow(1+r,n))/(Math.pow(1+r,n)-1);
- emi_res.innerHTML="EMI: ₹"+e.toFixed(2);
+ emi_res.innerHTML="Monthly EMI: ₹"+e.toFixed(2);
 }
-function mode(){document.body.classList.toggle("light");}
+function mode(){
+ document.body.classList.toggle("light");
+}
 </script>
 
 </body>
-  </html>
+ </html>
